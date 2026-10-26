@@ -1,0 +1,110 @@
+diff --git a/common.h b/common.h
+index c6e4965..993113b 100644
+--- a/common.h
++++ b/common.h
+@@ -95,6 +95,9 @@ struct LanguageInterface {
+                                 bool debug) const = 0;
+   virtual void RunSingleParsedProgram(const std::vector<uint8_t> &parsed,
+                                       size_t stepcount, bool debug) const = 0;
++  virtual std::vector<uint8_t> RunSingleParsedProgramState(
++      const std::vector<uint8_t> &parsed, size_t stepcount,
++      bool debug) const = 0;
+   virtual void PrintProgram(size_t pc_pos, const uint8_t *mem, size_t len,
+                             const size_t *separators,
+                             size_t num_separators) const = 0;
+@@ -103,6 +106,9 @@ struct LanguageInterface {
+       std::optional<std::string> initial_program,
+       std::function<bool(const SimulationState &)> callback) const = 0;
+   virtual ~LanguageInterface() {}
++  virtual std::vector<size_t> EvalPopulationSelfrep(
++      const std::vector<uint8_t> &population, size_t epoch,
++      size_t seed) const = 0;
+   virtual size_t EvalSelfrep(std::string program, size_t epoch, size_t seed,
+                              bool debug) = 0;
+   virtual size_t EvalParsedSelfrep(std::vector<uint8_t> &parsed, size_t epoch,
+@@ -119,10 +125,16 @@ struct Simulation : public LanguageInterface {
+                     size_t num_separators) const override;
+   void RunSingleParsedProgram(const std::vector<uint8_t> &parsed,
+                               size_t stepcount, bool debug) const override;
++  std::vector<uint8_t> RunSingleParsedProgramState(
++      const std::vector<uint8_t> &parsed, size_t stepcount,
++      bool debug) const override;
+   void RunSimulation(
+       const SimulationParams &params,
+       std::optional<std::string> initial_program,
+       std::function<bool(const SimulationState &)> callback) const override;
++  std::vector<size_t> EvalPopulationSelfrep(
++      const std::vector<uint8_t> &population, size_t epoch,
++      size_t seed) const override;
+   size_t EvalSelfrep(std::string program, size_t epoch, size_t seed,
+                      bool debug) override;
+   size_t EvalParsedSelfrep(std::vector<uint8_t> &parsed, size_t epoch,
+diff --git a/common_language.h b/common_language.h
+index 04946a6..3c4332a 100644
+--- a/common_language.h
++++ b/common_language.h
+@@ -295,6 +295,25 @@ void Simulation<Language>::RunSingleParsedProgram(
+                          nullptr, 0);
+ }
+ 
++template <typename Language>
++std::vector<uint8_t> Simulation<Language>::RunSingleParsedProgramState(
++    const std::vector<uint8_t> &parsed, size_t stepcount, bool debug) const {
++  constexpr size_t tape_size = 2 * kSingleTapeSize;
++  std::vector<uint8_t> initial(tape_size, 0);
++  CHECK(parsed.size() <= tape_size);
++  memcpy(initial.data(), parsed.data(), parsed.size());
++
++  DeviceMemory<uint8_t> mem(tape_size);
++  mem.Write(initial.data(), tape_size);
++
++  RUN(1, 1, RunOneProgram<Language>, mem.Get(), stepcount, debug);
++
++  Synchronize();
++  std::vector<uint8_t> final_state(tape_size);
++  mem.Read(final_state.data(), tape_size);
++  return final_state;
++}
++
+ template <typename Language>
+ void Simulation<Language>::RunSingleProgram(std::string program,
+                                             size_t stepcount,
+@@ -315,6 +334,25 @@ std::vector<uint8_t> Simulation<Language>::Parse(const std::string& program) {
+ }
+ 
+ 
++template <typename Language>
++std::vector<size_t> Simulation<Language>::EvalPopulationSelfrep(
++    const std::vector<uint8_t> &population, size_t epoch,
++    size_t seed) const {
++  CHECK(population.size() % kSingleTapeSize == 0);
++  size_t num_programs = population.size() / kSingleTapeSize;
++  CHECK(num_programs > 0 && num_programs % 32 == 0);
++  DeviceMemory<uint8_t> mem(population.size());
++  mem.Write(population.data(), population.size());
++  DeviceMemory<size_t> result(num_programs);
++  size_t epoch_seed = SplitMix64(SplitMix64(seed) ^ SplitMix64(epoch));
++  RUN(num_programs / 32, 32, CheckSelfRep<Language>,
++      mem.Get(), epoch_seed, num_programs, result.Get(), false);
++  Synchronize();
++  std::vector<size_t> scores(num_programs);
++  result.Read(scores.data(), num_programs);
++  return scores;
++}
++
+ template <typename Language>
+ size_t Simulation<Language>::EvalSelfrep(std::string program, size_t epoch,
+                                          size_t seed, bool debug) {
+diff --git a/cubff_py.cc b/cubff_py.cc
+index 26c1d9d..138fff7 100644
+--- a/cubff_py.cc
++++ b/cubff_py.cc
+@@ -83,6 +83,8 @@ PYBIND11_MODULE(cubff, m) {
+       .def("RunSimulation", &LanguageInterface::RunSimulation)
+       .def("RunSingleProgram", &LanguageInterface::RunSingleProgram)
+       .def("RunSingleParsedProgram", &LanguageInterface::RunSingleParsedProgram)
++      .def("RunSingleParsedProgramState", &LanguageInterface::RunSingleParsedProgramState)
++      .def("EvalPopulationSelfrep", &LanguageInterface::EvalPopulationSelfrep)
+       .def("EvalSelfrep", &LanguageInterface::EvalSelfrep)
+       .def("EvalParsedSelfrep", &LanguageInterface::EvalParsedSelfrep)
+       .def("Parse", &LanguageInterface::Parse);

@@ -1,0 +1,11 @@
+./bin/main \
+  --lang bff_noheads \
+  --num 131072 \
+  --seed 3 \
+  --max_epochs 1537 \
+  --mutation_prob 0.00024 \
+  --clear_interval 2048 \
+  --save_interval 256 \
+  --checkpoint_dir ~/abio/experiment012/seed3_checkpoints \
+  --print_interval 256 \
+  --disable_output
