@@ -79,3 +79,39 @@ submit to the Site API, and do not auto-publish reports to GitHub.
 cd ~/abio-publish/track2/rco002/rco002_experiment014
 python3 -m unittest -v test_audit.py test_short_horizon.py
 ```
+
+
+## Phase 3: mechanism-specific event tracing
+
+Following the positive-exposure step-513 intervention, inspect *which events
+and physical constituents* diverge, not just a conjunctive success flag.
+This tool replays matched states from step 512, records per-step suppressed
+catalytic birth opportunities, actual catalytic births, functional profiles,
+product uptake and first physical divergence, and writes a versioned JSON
+record. It does **not** infer a formal RAF or verified self-maintenance.
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/mechanism_trace.py \
+  --e011 ~/abio-publish/track2/rco002/rco002_experiment011/sim.py \
+  --settings ~/abio/track2/rco002/remote_batches/batch_d23012657c7d41e6ba18/regime_05/e011/settings.json \
+  --seed 3 --start 513 --end 535 --expected-sham-steps 6 \
+  --out ~/abio/track2/rco002/experiment014/results/e013_mechanism_trace_513.json
+```
+
+The stdout summary reports the time of first physical divergence and actual
+intervention exposure, while the detailed JSON preserves per-step ancestry.
+If the sham doesn't reproduce, stop causal interpretation. The original
+control_block may be unexposed; do not mislabel it an active control.
+
+To run the complete E014 test set:
+
+```bash
+cd ~/abio-publish/track2/rco002/rco002_experiment014
+python3 -m unittest -v test_audit.py test_short_horizon.py test_mechanism_trace.py
+```
+
+**Important distinction:** a strict E011 candidate is a *heuristically
+tracked functional motif with recorded turnover*; the E011 reaction model has
+not yet been mapped to a formal catalytic reaction system with explicitly
+validated RAF food-generation and catalyst-closure conditions.
