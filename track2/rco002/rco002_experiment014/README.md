@@ -115,3 +115,33 @@ python3 -m unittest -v test_audit.py test_short_horizon.py test_mechanism_trace.
 tracked functional motif with recorded turnover*; the E011 reaction model has
 not yet been mapped to a formal catalytic reaction system with explicitly
 validated RAF food-generation and catalyst-closure conditions.
+
+
+## Phase 4: exposure-matched negative control preflight
+
+The previous E014 result has a crucial limitation: the `control_block`
+condition suppressed **zero** events while the target intervention suppressed
+**four**. Thus it is an inactive control, not a causally informative control.
+
+The preflight script scans the saved phase-3 mechanism trace to find **off-target
+sham catalytic births at the same steps** as the target suppression events.
+This is design exploration and does not run new perturbations.
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/active_control_preflight.py \
+  --trace ~/abio/track2/rco002/experiment014/results/e013_mechanism_trace_513.json \
+  --out ~/abio/track2/rco002/experiment014/results/e013_active_control_preflight.json
+```
+
+A successful preflight means only that comparable *candidate opportunities*
+are present in the saved trace. It **does not** establish an active control:
+we must implement selective inhibition of those off-target events, verify
+actual suppression and biological/computational specificity, and repeat with
+prospectively selected targets in fresh seeds. No change has been made to the
+existing E011 dynamics or production API.
+
+```bash
+cd ~/abio-publish/track2/rco002/rco002_experiment014
+python3 -m unittest -v test_audit.py test_short_horizon.py test_mechanism_trace.py test_active_control_preflight.py
+```
