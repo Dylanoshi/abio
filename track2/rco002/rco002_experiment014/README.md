@@ -34,3 +34,48 @@ python3 -m unittest -v test_audit.py
 ## Next implementation phase
 
 Add versioned pre-intervention checkpoints, intervention-time organization identity, event-level causal traces, and preregistered outcome criteria. Maintain backward compatibility and test determinism before offering E014 through the remote batch API.
+
+
+## Phase 2: matched short-horizon intervention from immediately before E013 event
+
+`short_horizon.py` reconstructs E011 using the E013 regime's **recorded simulator
+settings**. It runs the unperturbed sham branch until the preceding time step,
+then deep-copies the same physical and tracking state for each condition.
+This is a *prospective reconstruction*, not an exported historical checkpoint.
+
+For E013 regime 05, seed 3, the retrospective audit identified the sham
+episode at steps **530–535**. Run:
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/short_horizon.py \
+  --e011 ~/abio-publish/track2/rco002/rco002_experiment011/sim.py \
+  --settings ~/abio/track2/rco002/remote_batches/batch_d23012657c7d41e6ba18/regime_05/e011/settings.json \
+  --seed 3 \
+  --event-start 530 \
+  --horizon 6 \
+  --expected-sham-steps 6 \
+  --out ~/abio/track2/rco002/experiment014/results/e013_regime05_seed3_counterfactual.json
+```
+
+**Gate 1:** `historical_sham_reproduced` must be `true`, otherwise stop
+interpretation and investigate why the reconstructed sham differs from the
+historical evidence.
+
+**Gate 2:** report per-mode `intervention_exposure`. A blocked condition
+with zero actual suppressed reactions is a no-op, not a causal intervention.
+
+**Gate 3:** report matched physical divergence, functional continuity and
+candidate intervals as *descriptive* outcomes. A 6-step correlation is not six
+independent replications, and even a targeted short-horizon loss would not
+prove self-maintenance without longer organization-specific tracking.
+
+These scripts do **not** modify the production E011/E012 runner, do not
+submit to the Site API, and do not auto-publish reports to GitHub.
+
+### Tests
+
+```bash
+cd ~/abio-publish/track2/rco002/rco002_experiment014
+python3 -m unittest -v test_audit.py test_short_horizon.py
+```
