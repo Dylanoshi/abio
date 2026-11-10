@@ -1,0 +1,22 @@
+{
+  "batch": "batch_429c8fecd42d438fab3f",
+  "completed": 1,
+  "cpu_seconds": 0.129,
+  "created": "2026-11-10T21:27:01.321999+00:00",
+  "schema": "abio-chatgpt-read-v1",
+  "scientific_caveat": "Potential cycles, ancestry, and strict candidate counters do not establish verified organizational self-maintenance.",
+  "status": "completed",
+  "summary": [
+    {
+      "catalysis_rate": 0.14,
+      "cycle_groups": 2,
+      "input_covered": 1,
+      "max_ancestry": 0,
+      "regime": "regime_00",
+      "rule_density": 0.65,
+      "strict_candidate_steps": 0
+    }
+  ],
+  "total": 1,
+  "updated": "2026-11-10T21:27:01.497452+00:00"
+}

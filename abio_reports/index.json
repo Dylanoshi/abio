@@ -1,0 +1,21 @@
+{
+  "batch_count": 2,
+  "batches": [
+    {
+      "completed": 30,
+      "id": "batch_d23012657c7d41e6ba18",
+      "status": "completed",
+      "total": 30,
+      "updated": "2026-11-10T22:26:52.108871+00:00"
+    },
+    {
+      "completed": 1,
+      "id": "batch_429c8fecd42d438fab3f",
+      "status": "completed",
+      "total": 1,
+      "updated": "2026-11-10T21:27:01.497452+00:00"
+    }
+  ],
+  "schema": "abio-chatgpt-read-v1",
+  "source": "ABIO local experiment runner; sanitized data only"
+}

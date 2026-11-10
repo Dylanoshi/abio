@@ -1,0 +1,5 @@
+seed,mode,catalytic_births,catalytically_born_particles_reused,reuse_fraction,downstream_births_using_products,longest_catalytic_ancestry,same_type_regeneration_links,possible_self_regeneration_not_verified
+0,control_block,0,0,0,0,0,0,yes
+0,product_scramble,0,0,0,0,0,0,yes
+0,sham,0,0,0,0,0,0,yes
+0,target_block,0,0,0,0,0,0,yes

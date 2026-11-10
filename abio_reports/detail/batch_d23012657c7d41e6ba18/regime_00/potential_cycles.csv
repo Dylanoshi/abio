@@ -1,0 +1,11 @@
+seed,rule_count,types,reactants,products,input_covered,reactions,subnetwork
+0,6,4,ABCD,BCD,0,AB>D;BA>C;BC>B;CB>C;DB>D;DD>C,
+0,2,2,BC,BC,1,BC>B;CB>C,1
+1,7,4,ABCD,ABCD,1,BC>D;CA>C;CB>C;CC>B;CD>C;DA>C;DD>A,
+1,2,2,BC,BC,1,CB>C;CC>B,1
+2,5,4,ABCD,BCD,0,AB>D;BA>C;CA>D;CD>C;DA>B,
+3,8,4,ABCD,ABC,0,AA>A;AC>C;BA>C;BB>A;BC>C;CB>A;DA>A;DC>B,
+3,2,2,AC,AC,1,AA>A;AC>C,1
+4,10,4,ABCD,ABCD,1,AA>C;AD>D;BA>B;BC>D;BD>D;CA>D;CB>D;CD>D;DA>A;DD>B,
+4,2,2,BD,BD,1,BD>D;DD>B,1
+4,2,2,AD,AD,1,AD>D;DA>A,1

@@ -1,0 +1,67 @@
+{
+  "batch": "batch_d23012657c7d41e6ba18",
+  "completed": 30,
+  "cpu_seconds": 750.788,
+  "created": "2026-11-10T22:12:23.379726+00:00",
+  "schema": "abio-chatgpt-read-v1",
+  "scientific_caveat": "Potential cycles, ancestry, and strict candidate counters do not establish verified organizational self-maintenance.",
+  "status": "completed",
+  "summary": [
+    {
+      "catalysis_rate": 0.08,
+      "cycle_groups": 10,
+      "input_covered": 7,
+      "max_ancestry": 19,
+      "regime": "regime_00",
+      "rule_density": 0.45,
+      "strict_candidate_steps": 0
+    },
+    {
+      "catalysis_rate": 0.08,
+      "cycle_groups": 11,
+      "input_covered": 8,
+      "max_ancestry": 20,
+      "regime": "regime_01",
+      "rule_density": 0.65,
+      "strict_candidate_steps": 0
+    },
+    {
+      "catalysis_rate": 0.08,
+      "cycle_groups": 19,
+      "input_covered": 17,
+      "max_ancestry": 20,
+      "regime": "regime_02",
+      "rule_density": 0.85,
+      "strict_candidate_steps": 19
+    },
+    {
+      "catalysis_rate": 0.14,
+      "cycle_groups": 10,
+      "input_covered": 7,
+      "max_ancestry": 21,
+      "regime": "regime_03",
+      "rule_density": 0.45,
+      "strict_candidate_steps": 0
+    },
+    {
+      "catalysis_rate": 0.14,
+      "cycle_groups": 11,
+      "input_covered": 8,
+      "max_ancestry": 22,
+      "regime": "regime_04",
+      "rule_density": 0.65,
+      "strict_candidate_steps": 0
+    },
+    {
+      "catalysis_rate": 0.14,
+      "cycle_groups": 19,
+      "input_covered": 17,
+      "max_ancestry": 22,
+      "regime": "regime_05",
+      "rule_density": 0.85,
+      "strict_candidate_steps": 6
+    }
+  ],
+  "total": 30,
+  "updated": "2026-11-10T22:26:52.108871+00:00"
+}
