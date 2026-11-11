@@ -243,7 +243,13 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         if i not in cells or j not in cells:continue
         e=tuple(sorted((i,j)))
         if e in bonds:
-            if rng.random()<a.bond_break:
+            draw = rng.random()
+            if s.get('e014_trace_bonds') is not None and t == s.get('e014_trace_step'):
+                s['e014_trace_bonds'].append(dict(
+                    step=t, event='bond_break_trial',
+                    sites=list(e), particle_ids=sorted((ids[i], ids[j])),
+                    draw=draw, threshold=a.bond_break, broken=bool(draw<a.bond_break)))
+            if draw<a.bond_break:
                 bonds.remove(e);degree[i]-=1;degree[j]-=1
         elif degree[i]<2 and degree[j]<2 and rng.random()<a.bond_form:
             bonds.add(e);degree[i]+=1;degree[j]+=1
