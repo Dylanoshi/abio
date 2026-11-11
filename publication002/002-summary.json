@@ -1,0 +1,126 @@
+{
+  "schema": "abio-research-note-002-summary-v1",
+  "status": "exploratory investigator-log-derived summary; full local JSON not yet archived with note",
+  "prepared_date": "2026-11-11",
+  "experiment": "E013/E014",
+  "repository": "Dylanoshi/abio",
+  "development_branch": "e014-candidate-audit-v1",
+  "batch_id": "batch_d23012657c7d41e6ba18",
+  "selection": {
+    "regimes": 6,
+    "seeds_per_regime": 5,
+    "selected_regime": "regime_05",
+    "seed": 3,
+    "selection": "retrospective positive episode"
+  },
+  "provenance": {
+    "sources": [
+      "investigator terminal logs provided in ABIO conversation",
+      "E014 source code on development branch"
+    ],
+    "raw_result_json_archived": false,
+    "production_api_unchanged": true
+  },
+  "branch": {
+    "original_selection_step": 360,
+    "counterfactual_start_step": 513,
+    "short_window_end": 535,
+    "extended_end": 600,
+    "historical_sham_short_candidate_steps": 6
+  },
+  "short_horizon": {
+    "sham": {
+      "suppressed": 0,
+      "candidate_steps": 6,
+      "final_similarity": 0.7845,
+      "final_functional_size": 10,
+      "motif_preserved": 1,
+      "regenerative_indicator": 1
+    },
+    "target_block": {
+      "suppressed": 4,
+      "candidate_steps": 0,
+      "final_similarity": 0.2357,
+      "final_functional_size": 8,
+      "motif_preserved": 0,
+      "regenerative_indicator": 0
+    },
+    "active_offtarget_block": {
+      "suppressed": 3,
+      "planned_suppressions": 4,
+      "realized_planned_suppressions": 3,
+      "candidate_steps": 6,
+      "final_similarity": 0.7845,
+      "final_functional_size": 10,
+      "motif_preserved": 1,
+      "regenerative_indicator": 1
+    },
+    "product_scramble_separate_run": {
+      "suppressed": 0,
+      "candidate_steps": 6,
+      "final_similarity": 0.6708,
+      "final_functional_size": 10,
+      "motif_preserved": 1,
+      "regenerative_indicator": 1
+    }
+  },
+  "extended_window": {
+    "sham": {
+      "present_steps": 30,
+      "first_absent_step": 543,
+      "first_reappearance": null,
+      "motif_intervals": [
+        [
+          525,
+          535
+        ]
+      ],
+      "candidate_intervals": [
+        [
+          530,
+          535
+        ]
+      ]
+    },
+    "target_block": {
+      "present_steps": 30,
+      "first_absent_step": 543,
+      "first_reappearance": null,
+      "motif_intervals": [],
+      "candidate_intervals": []
+    },
+    "active_offtarget_block": {
+      "present_steps": 30,
+      "first_absent_step": 543,
+      "first_reappearance": null,
+      "motif_intervals": [
+        [
+          525,
+          535
+        ]
+      ],
+      "candidate_intervals": [
+        [
+          530,
+          535
+        ]
+      ]
+    }
+  },
+  "evidence_classifications": {
+    "potential_reaction_network_closure": "not tested as formal RAF",
+    "realized_catalytic_activity": "observed in simulator; target suppression 4 and off-target suppression 3",
+    "organizational_continuity": "heuristic selected lineage detected to step 542; first absent step 543",
+    "regenerative_incorporation": "heuristic indicator present in sham and off-target branch only in candidate window",
+    "experimentally_verified_self_maintenance": false,
+    "long_term_establishment": false
+  },
+  "caveats": [
+    "single post-selected regime-seed trajectory",
+    "six consecutive steps serially correlated",
+    "3 versus 4 intervention count unmatched",
+    "control schedule postselected and no spatial or reaction centrality match",
+    "lineage tracking heuristic",
+    "full sanitized local results/settings must be attached for independent reruns"
+  ]
+}
