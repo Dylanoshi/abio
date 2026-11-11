@@ -145,3 +145,37 @@ existing E011 dynamics or production API.
 cd ~/abio-publish/track2/rco002/rco002_experiment014
 python3 -m unittest -v test_audit.py test_short_horizon.py test_mechanism_trace.py test_active_control_preflight.py
 ```
+
+
+## Phase 5: execute the actual off-target inhibition
+
+This phase uses `e014_sim.py`, an **isolated copy of E011** with one guarded
+scheduled off-target inhibition hook, plus `active_control_run.py`.
+It reconstructs the same sham state before step 513 and executes matched
+sham, target-block and scheduled off-target control branches through step 535.
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/active_control_run.py \
+  --sim ~/abio-publish/track2/rco002/rco002_experiment014/e014_sim.py \
+  --settings ~/abio/track2/rco002/remote_batches/batch_d23012657c7d41e6ba18/regime_05/e011/settings.json \
+  --preflight ~/abio/track2/rco002/experiment014/results/e013_active_control_preflight.json \
+  --seed 3 --start 513 --end 535 --expected-sham-steps 6 \
+  --out ~/abio/track2/rco002/experiment014/results/e013_active_control_run.json
+```
+
+**Interpretation gates:** the sham must reproduce 6 candidate steps; the new
+off-target branch must report `realized_scheduled_offtarget_suppressions` and
+`all_offtarget_events_realized`. The original four schedule entries might
+not all remain available after earlier interventions alter the state. If they
+do not all occur, this is *not* exposure-matched in event count. Matching
+event count and timing would still not match spatial, chemical, or network
+centrality. The schedule was retrospectively chosen, so any result remains
+exploratory, not prospective independent confirmation.
+
+The production API and E011 simulator are unchanged.
+
+```bash
+cd ~/abio-publish/track2/rco002/rco002_experiment014
+python3 -m unittest -v test_audit.py test_short_horizon.py test_mechanism_trace.py test_active_control_preflight.py test_active_control_run.py
+```
