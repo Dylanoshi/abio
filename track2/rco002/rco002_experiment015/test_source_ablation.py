@@ -74,7 +74,10 @@ class SourceAblationTests(unittest.TestCase):
             sim.tick(state,0,"local",t,self.settings,[],[])
         choice,record=choose_focal(state,50)
         self.assertTrue(choice is None or choice["age_at_checkpoint"]>=30)
-        self.assertEqual(record["prior_window"],[11,50] if choice else record.get("prior_window"))
+        if choice:
+            self.assertEqual(record["prior_window"],[11,50])
+        else:
+            self.assertEqual(record["eligible"],0)
 
     def test_small_seed_smoke(self):
         params=dict(DEFAULTS,size=12,steps=100)
