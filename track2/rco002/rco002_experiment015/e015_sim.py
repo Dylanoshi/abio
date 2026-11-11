@@ -247,10 +247,12 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         # Permute the SAME accumulated field strengths to randomized locations,
         # preserving global protection mass while breaking spatial association.
         values=list(active_field.values())
-        positions=sorted(active_field)
+        # Select uniformly from all lattice sites rather than permuting only
+        # among already active locations, which would preserve spatial hotspots.
+        positions=list(range(n))
         shuffle_rng=rng_for(seed,t,91)
         shuffle_rng.shuffle(positions)
-        active_field=dict(zip(positions,values))
+        active_field=dict(zip(positions[:len(values)],values))
     elif mode=='disabled':
         active_field={}
     s['e015_last_field']=active_field
