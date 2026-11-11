@@ -229,3 +229,34 @@ Run `python3 -m unittest -v test_fate_audit.py` before executing.
 An original tracked ID can be lost by splitting, merging, or a replacement
 assignment while substantial constituent material survives. Any overlapping
 functional group is a successor **candidate**, not proven continuity.
+
+
+## Phase 8: direct causal-mechanism audit of step-543 bond loss
+
+This phase instruments **only the already existing E014 simulator variant** to
+record the **original random draw** used to test each existing bond against
+`bond_break` at step 543. It does **not** change the transition rule or RNG
+call order. The original E011 simulator is untouched. The matched reconstruction
+reports whether each bond of the tracked functional group at step 542 was
+actually removed by a successful stochastic break trial.
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment014
+python3 -m unittest -v test_bond_break_cause.py test_fate_audit.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/bond_break_cause.py \
+  --sim ~/abio-publish/track2/rco002/rco002_experiment014/e014_sim.py \
+  --settings ~/abio/track2/rco002/remote_batches/batch_d23012657c7d41e6ba18/regime_05/e011/settings.json \
+  --preflight ~/abio/track2/rco002/experiment014/results/e013_active_control_preflight.json \
+  --seed 3 --start 513 \
+  --out ~/abio/track2/rco002/experiment014/results/e013_bond_break_cause_543.json
+```
+
+The log distinguishes direct stochastic bond breakage from unexplained
+end-of-step bond loss. Even a direct break is not proof that the organization
+could not repair itself, or that catalytic inhibition determined this event.
+The same keyed random streams and shared prehistory make the branches
+**correlated**, not independent replicates. No RAF or life claim.
