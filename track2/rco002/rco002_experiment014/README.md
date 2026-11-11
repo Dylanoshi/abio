@@ -179,3 +179,28 @@ The production API and E011 simulator are unchanged.
 cd ~/abio-publish/track2/rco002/rco002_experiment014
 python3 -m unittest -v test_audit.py test_short_horizon.py test_mechanism_trace.py test_active_control_preflight.py test_active_control_run.py
 ```
+
+
+## Phase 6: lineage survival and recovery audit
+
+The extended step 513–600 run shows that the *selected functional lineage* has
+size zero at the final step in all modes. This does not imply system extinction.
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/lineage_survival.py \
+  --input ~/abio/track2/rco002/experiment014/results/e013_active_control_extended.json \
+  --out ~/abio/track2/rco002/experiment014/results/e013_lineage_survival.json
+```
+
+The audit reports first detected absence, any later reappearance, contiguous
+motif-preservation and candidate intervals, and time present. The lineage
+identifier is heuristic; a tracked lineage disappearing does not show all
+components died or demonstrate failure of all related organizations.
+
+Unit tests:
+
+```bash
+cd ~/abio-publish/track2/rco002/rco002_experiment014
+python3 -m unittest -v test_lineage_survival.py
+```
