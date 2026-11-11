@@ -36,8 +36,22 @@ def local_state(sim,s,step):
     target=s["target_flid"]
     desc=s["fmembers"].get(target)
     groups=component_records(sim,s)
+    # Keep an exact identity census only at the transition of interest.
+    # Unlike bonded components, this includes isolated surviving particles.
+    identity_census = {}
+    if step in (542, 543):
+        degree = {pid: 0 for pid in s["ids"].values()}
+        for u, v in s["bonds"]:
+            degree[s["ids"][u]] += 1
+            degree[s["ids"][v]] += 1
+        identity_census = {
+            str(pid): {"site": site, "type": s["cells"][site],
+                       "degree": degree[pid]}
+            for site, pid in sorted(s["ids"].items())
+        }
     return {
         "step":step,
+        "particle_identity_census":identity_census,
         "physical_hash":physical_hash(s),
         "target_fid":target,
         "target_present":bool(desc),
@@ -105,7 +119,33 @@ def audit(sim,settings,preflight,seed,start,inspect_start,inspect_end):
         prev,now=pair
         before=set(prev["target_group"]["particle_ids"]) if prev["target_group"] else set()
         post_ids={pid for group in now["groups"] for pid in group["particle_ids"]}
+        census_542 = prev["particle_identity_census"]
+        census_543 = now["particle_identity_census"]
+        fates = []
+        for pid in sorted(before):
+            p = str(pid)
+            old = census_542.get(p)
+            new = census_543.get(p)
+            fates.append({
+                "particle_id": pid,
+                "present_at_542": old is not None,
+                "survived_to_543": new is not None,
+                "site_at_542": old["site"] if old else None,
+                "site_at_543": new["site"] if new else None,
+                "type_at_542": old["type"] if old else None,
+                "type_at_543": new["type"] if new else None,
+                "bond_degree_542": old["degree"] if old else None,
+                "bond_degree_543": new["degree"] if new else None,
+            })
         branches[mode]={
+            "target_particle_fates_542_to_543": fates,
+            "target_survivors_anywhere_543": sum(x["survived_to_543"] for x in fates),
+            "target_survivors_isolated_543": sum(
+                x["survived_to_543"] and x["bond_degree_543"] == 0 for x in fates
+            ),
+            "target_particles_disappeared_543": sum(
+                not x["survived_to_543"] for x in fates
+            ),
             "target_fid":s["target_flid"],
             "target_present_542":prev["target_present"],
             "target_present_543":now["target_present"],
@@ -165,6 +205,10 @@ def main():
             "target_present_543":v["target_present_543"],
             "target_size_542":v["target_size_542"],
             "target_particles_in_bonded_groups_543":v["target_particle_ids_still_in_bonded_groups_543"],
+            "target_survivors_anywhere_543":v["target_survivors_anywhere_543"],
+            "target_survivors_isolated_543":v["target_survivors_isolated_543"],
+            "target_particles_disappeared_543":v["target_particles_disappeared_543"],
+            "target_particle_fates":v["target_particle_fates_542_to_543"],
             "best_successors":v["candidate_successors_543"][:3],
             "global_particles_542":v["global_particles_542"],
             "global_particles_543":v["global_particles_543"],
