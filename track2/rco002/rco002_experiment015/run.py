@@ -47,9 +47,12 @@ def state_summary(sim, state, seed, mode, parameters, window_start):
         and row["departed_cumulative"]>=CRITERIA["min_cumulative_departures"]
         and row["active_catalytic_motifs"]>=CRITERIA["min_active_catalytic_motifs"]
     ]
-    max_sizes=[]
-    for group_step in set(row["step"] for row in functional):
-        max_sizes.append(max(row["size"] for row in functional if row["step"]==group_step))
+    # Linear-time per-step maxima; functional_rows may contain many components.
+    max_by_step={}
+    for row in functional:
+        t=row["step"]
+        max_by_step[t]=max(max_by_step.get(t,0),row["size"])
+    max_sizes=list(max_by_step.values())
     start=state["history"][0]
     end=state["history"][-1]
     activity_field=state["e015_field"]
