@@ -47,6 +47,10 @@ def write_csv(path, rows):
     with open(path,'w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=keys); w.writeheader(); w.writerows(rows)
 
+def effective_break_rate(baseline, strength, local_value):
+    """Global baseline modified by a nonnegative local catalytic activity field."""
+    return baseline/(1.0+max(0.0,strength)*max(0.0,local_value))
+
 def initialize(seed, a):
     n=a.size*a.size
     init=random.Random(seed+171); chem=random.Random(seed+202607)
@@ -266,7 +270,7 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
             draw=rng.random()
             strength=max(0.0,getattr(a,'protection_strength',3.0))
             local_value=(active_field.get(i,0.0)+active_field.get(j,0.0))/2.0
-            effective_break=a.bond_break/(1.0+strength*local_value)
+            effective_break=effective_break_rate(a.bond_break,strength,local_value)
             s['e015_stats']['break_trials']+=1
             if local_value>.01:
                 s['e015_stats']['exposed_trials']+=1
