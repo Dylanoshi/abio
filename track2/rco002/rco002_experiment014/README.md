@@ -260,3 +260,48 @@ end-of-step bond loss. Even a direct break is not proof that the organization
 could not repair itself, or that catalytic inhibition determined this event.
 The same keyed random streams and shared prehistory make the branches
 **correlated**, not independent replicates. No RAF or life claim.
+
+
+## Phase 9: global bond-turnover counterfactual at step 543
+
+Phase 8 confirmed that two bonds connecting the tracked three-particle
+organization were removed by **ordinary stochastic break trials** at step 543:
+their site-specific draws were 0.0019299045 and 0.0034529178 against the
+original threshold 0.018. The same draws occurred in all matched treatment
+branches, so those observations are **correlated, not independent**.
+
+Phase 9 reconstructs the **sham state at the end of step 542** and forks
+counterfactual conditions with global bond-break thresholds
+`0.0, 0.002, 0.004, 0.018`, each in two variants:
+
+- **Pulse:** set the alternate threshold for step 543 only, then restore the
+  baseline threshold for steps 544–600.
+- **Sustained:** set the alternate threshold for steps 543–600.
+
+All variants share a physically identical checkpoint and differ only in the
+bond-break threshold at or after step 543. The intervention affects **every
+bond in the substrate**, not just this candidate's edges. It is an externally
+imposed mechanism probe, not spontaneous bond repair.
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment014
+python3 -m unittest -v test_bond_turnover_counterfactual.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/bond_turnover_counterfactual.py \
+  --sim ~/abio-publish/track2/rco002/rco002_experiment014/e014_sim.py \
+  --settings ~/abio/track2/rco002/remote_batches/batch_d23012657c7d41e6ba18/regime_05/e011/settings.json \
+  --seed 3 --checkpoint 542 --end 600 \
+  --rates 0.0 0.002 0.004 0.018 \
+  --out ~/abio/track2/rco002/experiment014/results/e013_bond_turnover_counterfactual.json
+```
+
+The summary reports first absence of the original functional lineage and first
+disconnection of the three checkpoint constituents, along with duration and
+final fate. The unmodified baseline (`0.018`) must reproduce loss at step
+543; if it does not, stop interpretation. A lower break threshold that extends
+lifetime demonstrates a dependence on external turnover conditions, **not**
+endogenous organizational self-maintenance. Future prospective studies must
+test independent seeds and whether organization itself alters bond durability.
