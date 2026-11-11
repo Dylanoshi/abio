@@ -103,14 +103,9 @@ def run(sim,parameters,seeds,checkpoint,end):
                         sum(x["original_particle_ids_still_in_fid"]>0 for x in tracked),
                     "mean_bonds":len(branch["bonds"]),
                 })
-            first_absence={}
-            for g in originals:
-                fid=g["fid"]
-                # Reconstruct only the indexed checkpoint group from sparse final
-                # snapshots? Record the complete group trace below separately.
-                first_absence[str(fid)]=None
-            # Derive per-checkpoint-fid continuity using the already collected
-            # actual final state, and window totals from per-step tracked snapshots.
+            # Count matched, checkpoint-selected functional identities at
+            # each post-intervention step; report their fate independently
+            # of subsequent newly generated components.
             modes[mode]={
                 "checkpoint_group_count":len(originals),
                 "mean_original_fids_present":round(statistics.mean(x["original_fids_present"] for x in timeline),3),
