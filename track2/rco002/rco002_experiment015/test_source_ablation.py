@@ -32,6 +32,9 @@ class SourceAblationTests(unittest.TestCase):
         # events must be identical; only the future field levels may differ.
         all_state=copy.deepcopy(state)
         stopped=copy.deepcopy(state)
+        before_deposits=state["e015_stats"]["deposited_births_nonfocal"]
+        before_blocked=state["e015_stats"]["blocked_deposits_nonfocal"]
+        before_catalysis=state["catalytic_births"]
         stopped["e015_deposition_policy"]="none"
         sim.tick(all_state,1,"local",31,a,[],[])
         sim.tick(stopped,1,"local",31,a,[],[])
@@ -40,10 +43,21 @@ class SourceAblationTests(unittest.TestCase):
         self.assertEqual(all_state["ids"],stopped["ids"])
         self.assertEqual(all_state["catalytic_births"],stopped["catalytic_births"])
         self.assertEqual(all_state["motif_events"],stopped["motif_events"])
+        # Counters are cumulative. Historical deposits before the checkpoint
+        # must remain; the ablated branch must add no NEW deposits.
         self.assertEqual(
-            stopped["e015_stats"]["deposited_births_nonfocal"],0)
-        self.assertGreater(
-            stopped["e015_stats"]["blocked_deposits_nonfocal"],0)
+            stopped["e015_stats"]["deposited_births_nonfocal"],before_deposits)
+        new_births=stopped["catalytic_births"]-before_catalysis
+        self.assertGreater(new_births,0)
+        self.assertEqual(
+            stopped["e015_stats"]["blocked_deposits_nonfocal"]-before_blocked,
+            new_births)
+        self.assertEqual(
+            all_state["e015_stats"]["deposited_births_nonfocal"]-before_deposits,
+            new_births)
+        # At this tick both variants see the same previous field; any effect
+        # of deposit suppression on bond-breaking begins on later ticks.
+        self.assertNotEqual(all_state["e015_field"],stopped["e015_field"])
 
     def test_default_equals_explicit_all_deposition(self):
         sim=self.sim
