@@ -204,3 +204,28 @@ Unit tests:
 cd ~/abio-publish/track2/rco002/rco002_experiment014
 python3 -m unittest -v test_lineage_survival.py
 ```
+
+
+## Phase 7: particle-level fate audit across the step-543 loss of tracking
+
+The prior survival audit found the **selected functional lineage ID** first
+absent at step 543 under sham, target inhibition, and active off-target
+inhibition. Phase 7 reconstructs the matched branches and records physical
+particle survival, bonds, nearby candidate successor groups, and functional
+profiles on steps 538–548. It distinguishes lineage assignment loss from
+true disappearance of material. The tool does **not** infer self-maintenance.
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment014/fate_audit.py \
+  --sim ~/abio-publish/track2/rco002/rco002_experiment014/e014_sim.py \
+  --settings ~/abio/track2/rco002/remote_batches/batch_d23012657c7d41e6ba18/regime_05/e011/settings.json \
+  --preflight ~/abio/track2/rco002/experiment014/results/e013_active_control_preflight.json \
+  --seed 3 --start 513 --inspect-start 538 --inspect-end 548 \
+  --out ~/abio/track2/rco002/experiment014/results/e013_fate_audit_543.json
+```
+
+Run `python3 -m unittest -v test_fate_audit.py` before executing.
+An original tracked ID can be lost by splitting, merging, or a replacement
+assignment while substantial constituent material survives. Any overlapping
+functional group is a successor **candidate**, not proven continuity.
