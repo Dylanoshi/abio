@@ -326,13 +326,28 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
             s['lineage_events'][lid]+=1;s['products'][pid]=lid
         motif=cells[x]+cells[y]+'>'+product
         s['product_ancestry'][pid]=dict(producer_fid=flid,motif=motif,type=product)
-        # Catalytic activity contributes a temporary local protection field in
-        # all treatment arms; only spatial coupling differs by mode.
-        # The field begins affecting bond breaks on the FOLLOWING tick.
-        gain=getattr(a,'field_gain',1.0)
-        cap=getattr(a,'field_cap',4.0)
-        for site in (x,y,chosen):
-            s['e015_field'][site]=min(cap,s['e015_field'].get(site,0.0)+gain)
+        # E015 Phase 3: observational source tagging and *experiment-only*
+        # ablation of activity-field deposits. Successful catalytic births
+        # themselves still happen, with identical reaction rules and draws.
+        # When absent, the policy is the exact historical all-deposit behavior.
+        policy=s.get('e015_deposition_policy','all')
+        focal=s.get('e015_focal_fid')
+        source_is_focal=(focal is not None and flid==focal)
+        if policy not in ('all','none','nonfocal_only','focal_only'):
+            raise ValueError('Unknown E015 deposition policy')
+        deposit=(policy=='all' or
+                 (policy=='focal_only' and source_is_focal) or
+                 (policy=='nonfocal_only' and not source_is_focal))
+        source_key='focal' if source_is_focal else 'nonfocal'
+        s['e015_stats']['catalytic_births_'+source_key]+=1
+        if deposit:
+            gain=getattr(a,'field_gain',1.0)
+            cap=getattr(a,'field_cap',4.0)
+            for site in (x,y,chosen):
+                s['e015_field'][site]=min(cap,s['e015_field'].get(site,0.0)+gain)
+            s['e015_stats']['deposited_births_'+source_key]+=1
+        else:
+            s['e015_stats']['blocked_deposits_'+source_key]+=1
         s['motif_events'].append(dict(seed=seed,mode=mode,step=t,producer_fid=flid,
             target_producer=int(flid is not None and flid==s['target_flid']),
             exact_branch_motif=int(motif in s.get('branch_motifs',set())),
