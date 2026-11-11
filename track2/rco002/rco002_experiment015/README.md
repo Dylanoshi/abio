@@ -95,3 +95,68 @@ Outputs: `results.json` (complete parameters, criteria, records and aggregation)
 ## Source comparison
 
 The disabled E015 physics must exactly match `rco002_experiment014/e014_sim.py`. E011 and the production runner API are unchanged. This is a mechanism exploration, not a declaration of abiogenesis.
+
+
+## First-pass observations (12 seeds, 2026-11-11)
+
+All four E015 unit tests passed on the investigator's Mac, and all 36 first-pass
+runs completed using the prespecified settings. The source output remains at
+`~/abio/track2/rco002/experiment015/results/first_pass/results.json`;
+the numbers below are **transcribed from the shared terminal report**, not
+verified against a GitHub-archived raw output.
+
+| Mean metric | Disabled | Local | Shuffled |
+|---|---:|---:|---:|
+| Bonds (steps 301–600) | 211.9800 | 212.8622 | 214.8173 |
+| Largest bonded component | 12.4395 | 12.6191 | 12.8408 |
+| Candidate observation-steps | 7922.0000 | 7901.8333 | 7975.5000 |
+| Distinct candidate lineage IDs | 164.2500 | 159.5000 | 159.7500 |
+| Maximum tracked age | 356.1667 | 395.9167 | 408.4167 |
+| Actual bond breaks (full run) | 1012.6667 | 863.5833 | 903.4167 |
+| Exposed bond trials (full run) | 0 | 26575.4167 | 24274.8333 |
+
+The local arm saw fewer realized bond-break events than the disabled arm
+(149.0834 fewer per seed on average), but **did not improve** the primary
+candidate observation-step metric: local minus disabled = -20.1667;
+local minus shuffled = -73.6667. Local exceeded disabled on candidate-steps
+in 7/12 seeds, and exceeded shuffled in 5/12 seeds. This is a **mixed /
+negative result for the proposed organization-level advantage**, not proof
+of emergent self-maintenance.
+
+The total number of breaks is affected by the number of bonds sampled and
+activity history, so it is *not* a clean per-trial hazard ratio. Likewise,
+counted observation-steps are serially correlated, often overlapping
+component-level observations, **not independent individual organisms**.
+
+## Phase 2 — predeclared follow-up: matched field interruption
+
+To isolate post-formation dependency on continued spatial feedback, E015
+Phase 2 starts **each seed** under local feedback through the end of step 300,
+then deep-copies an *identical physical state and field* into three conditions:
+continued local, disabled field effect, and shuffled field effect. We select
+eligible bonded functional components at the checkpoint using only their
+age (≥30), size (≥3) and nonempty catalytic-pair profile. Thus no candidate
+is chosen based on its *future* survival.
+
+No organism-specific repair or evolutionary objective is introduced. Branch
+interventions apply globally, so improved persistence would demonstrate
+dependence on a designed environment-level stabilizing law, not autonomous
+regulation by a living individual.
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment015
+python3 -m unittest -v test_ablation.py test_e015.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment015/ablation.py \
+  --checkpoint 300 --end 600 \
+  --out ~/abio/track2/rco002/experiment015/results/field_ablation.json
+```
+
+Read `aggregate` and compare all 12 matched-seed records in the JSON.
+The recorded functional IDs are heuristic; splitting/reassignment can produce
+false apparent disappearance, and motif similarity is not a demonstration of
+self-regeneration. Preserve the entire first-pass negative result without
+retuning the same data.
