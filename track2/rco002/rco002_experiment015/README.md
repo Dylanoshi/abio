@@ -379,3 +379,82 @@ nonzero opportunity in enough seeds; off-target exposure differences are
 quantified. Only then interpret source-sensitive differences in bridge
 survival and function. No claims of verified RAF closure, autopoiesis,
 self-maintenance, heredity or abiogenesis.
+
+
+## Phase 5 observed (2026-11-12)
+
+All 12 seeds and four matched arms completed. Mean material bridge
+presence steps: sham 226.0833, dynamically suppressed self source 201.5833,
+previous off-target control 245.3333 and global field removed 179.7500.
+The mean sham-minus-self value +24.5 is driven **entirely by seed 2
+(+191 steps) and seed 3 (+103 steps)**; remaining 10 seeds tie exactly.
+The old off-target control suppressed 43 nonfocal deposit events/seed on
+average against 12.17 self-deposits suppressed, and was not count-matched
+in ANY seed. This is exploratory evidence of intervention sensitivity,
+not replicated self-maintenance or population-level support.
+
+## Phase 6 (prepared 2026-11-12): causal first-divergence and timed controls
+
+Prespecified mechanism audit of known responders **seed 2 and seed 3**:
+starting from the SAME t=300 local-feedback state, independently run:
+(1) sham deposition; (2) dynamic material-bridge self deposition removal;
+(3) time-scheduled off-target control. First, evolve a shadow-sham
+trajectory and collect the number of successful focal-source catalytic
+births per step in t301–600. Use that fixed event-count schedule to
+attempt to block an equal number of actual *nonfocal* field deposits
+at the exact corresponding step in the control. The schedule uses
+sham events after t300, so it is **not strictly preintervention-fixed**;
+however, its selection never inspects survival or intervention outcomes.
+The shadow schedule is an experimental control, not a mechanism available
+to agents in the simulated world.
+
+For each arm record the first field-hash divergence, bond-set divergence,
+cell-population divergence, material bridge divergence, matching bond
+trials with differing break outcomes, source event records, actual focal
+versus nonfocal deposits blocked, and time-specific missed budgets.
+Assert matching checkpoint states and no direct alterations to catalytic
+births; continue tracking the bridged successor independently in each arm.
+
+Critical caveats: event counts are prescribed from sham, but realized
+nonfocal opportunities may be insufficient or trajectories may diverge
+such that actual self-suppressed counts differ from sham focal births.
+The spatial location, capped field mass, diffusion (none here), and
+protective exposure of the off-target control are **not** matched.
+A bond-trial difference may follow from a prior globally divergent
+trajectory rather than the immediately preceding suppressed deposit.
+An apparent bridge loss can reflect a tracing discontinuity rather than
+loss of a functional organization.
+
+### Run historical-seed diagnostic
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment015
+python3 -m unittest -v test_causal_divergence.py test_dynamic_source_ablation.py test_ancestry_exposure.py test_source_ablation.py test_e015.py test_ablation.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment015/causal_divergence.py \
+  --seeds 2 3 --checkpoint 300 --end 600 \
+  --out ~/abio/track2/rco002/experiment015/results/causal_divergence_2_3.json
+```
+
+### Fresh seed validation
+
+**Separate held-out exploratory set**, seeds 12–23, unchanged checkpoint,
+defaults and selection. Do **not** treat the original two seed 2/3 cases as
+independent replication. Prospectively report the 12 paired effects, both
+functional and material continuity, and actual off-target dose matching.
+No post-hoc tuning or select-only-winners filtering.
+
+```bash
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment015/causal_divergence.py \
+  --seeds 12 13 14 15 16 17 18 19 20 21 22 23 \
+  --checkpoint 300 --end 600 \
+  --out ~/abio/track2/rco002/experiment015/results/causal_divergence_heldout.json
+```
+
+The first-divergence trace is a diagnostic, NOT proof that a dynamically
+regenerating chemical RAF or self-maintaining organism exists. Preserve
+the negative/mixed first-pass and source-specific Phase 3 findings.
