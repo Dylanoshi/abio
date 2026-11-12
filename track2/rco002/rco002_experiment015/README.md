@@ -230,3 +230,76 @@ Do not interpret a preserved heuristic ID as verified organism maintenance.
 A stronger subsequent test will examine actual material ancestry, catalytic
 replenishment and damage repair with controls matched for total field mass.
 Keep the original E015 first-pass negative/mixed results in the report.
+
+
+## Phase 3 observations (2026-11-11)
+
+All 12 E015 Phase 3 tests passed and 12 matched seed continuations
+completed. Focal lineage mean present-steps /300: normal **77.0833**,
+no-new-field **89.7500**, remove-focal-source **78.1667**, focal-only
+**80.8333**. Mean normal provenance counts: **5.00 focal birth deposits**
+versus **897.00 external birth deposits** per seed. Focal removal was
+exposed in **11/12 seeds**, but normal-minus-focal-removed tracked
+persistence differed only in seed 2 (+44 steps) and seed 7 (−57 steps),
+and was zero in the other 10 seeds. This is **not evidence of a reliable
+source-dependent self-maintenance advantage**. These are heuristic focal
+lineages, and their numerical IDs can change on splits/merges.
+
+## Phase 4 — Material bridge, catalytic provenance and actual bond exposure
+
+Prepared **2026-11-12**, prior to observing Phase 4 outputs. This is a
+**diagnostic observational audit**, not a new mechanism or intervention.
+
+Use the same checkpoint and one focal group selected only by its
+precheckpoint catalytic activity (past 40 steps), age and size. For
+each seed, continue local feedback from step 301 to 600. The new
+`ancestry_exposure_audit.py` records:
+
+1. **Material bridge:** after each bond update, choose the connected
+   component with greatest overlap of actual particle IDs with the
+   previous traced component; ties are recorded as ambiguous, and a
+   zero-overlap transition ends the trace. It can survive lineage-ID
+   reassignment, but cannot establish functional continuity when every
+   original particle disappears at once.
+2. **Source attribution:** for every *realized* catalytic birth, classify
+   its current connected source as `self_bridge` if assigned to the
+   current material-bridge component, `neighboring` if its birth or
+   catalyst sites touch the traced component, or `external` otherwise.
+   Record source counts and the actual net protective-field gain after
+   accounting for site-level caps. Precheckpoint field is `legacy`
+   (unknown source).
+3. **Field exposure:** for existing bonds in the previously traced
+   component, log their actual break trials, whether any protection
+   was present, whether their field contains contributions tagged
+   `self_bridge`, and whether a same-draw removal of only the
+   self-tagged field would have allowed a break. The last counter is
+   a one-step threshold comparison with all other fields and draws
+   fixed; it is **not** a full dynamic causal intervention.
+4. **Checks:** per-site provenance sums must reproduce the simulation's
+   protective field after every update; the instrumented trajectory
+   must hash-match an independent, hook-free replay. No E011–E014 or
+   production runner changes.
+
+**Preregistered first audit:** seeds 0–11, 24×24, 600 steps,
+checkpoint 300, same E015 parameters; no parameter tuning or
+retrospective seed selection. Full per-step records are versioned JSON.
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment015
+python3 -m unittest -v test_ancestry_exposure.py test_source_ablation.py test_e015.py test_ablation.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment015/ancestry_exposure_audit.py \
+  --checkpoint 300 --end 600 \
+  --out ~/abio/track2/rco002/experiment015/results/ancestry_exposure.json
+```
+
+**Interpretation gate:** distinguish *local activity around a structure*
+from *activity that is physically part of its material successor*.
+A few attributable prevented bond breaks establish a narrow exposure
+mechanism only; they do not prove that the structure produces its own
+continuity. No inference of RAF closure, autopoiesis, spontaneous
+life, reproduction or adaptive computation from these counts. Preserve
+the negative/mixed prior stages and publication hold.
