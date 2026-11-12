@@ -342,11 +342,22 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         policy=s.get('e015_deposition_policy','all')
         focal=s.get('e015_focal_fid')
         source_is_focal=(focal is not None and flid==focal)
-        if policy not in ('all','none','nonfocal_only','focal_only'):
+        if policy not in ('all','none','nonfocal_only','focal_only',
+                          'dynamic_self_off','offtarget_rate_control'):
             raise ValueError('Unknown E015 deposition policy')
+        # The dynamic focal ID is set by an observation-only material-bridge
+        # tracker immediately after identify(), before catalytic births.
+        # A calibrated off-target control uses the fixed probability learned
+        # exclusively from the PRE-intervention checkpoint history.
+        off_target_draw=(random.Random(mix(seed+12345,t,92,ia,ib)).random()
+                         if policy=='offtarget_rate_control' else None)
+        off_target_rate=s.get('e015_offtarget_rate',0.0)
         deposit=(policy=='all' or
                  (policy=='focal_only' and source_is_focal) or
-                 (policy=='nonfocal_only' and not source_is_focal))
+                 (policy=='nonfocal_only' and not source_is_focal) or
+                 (policy=='dynamic_self_off' and not source_is_focal) or
+                 (policy=='offtarget_rate_control' and
+                  (source_is_focal or off_target_draw>=off_target_rate)))
         source_key='focal' if source_is_focal else 'nonfocal'
         s['e015_stats']['catalytic_births_'+source_key]+=1
         if deposit:
