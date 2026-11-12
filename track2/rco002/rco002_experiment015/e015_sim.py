@@ -343,7 +343,8 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         focal=s.get('e015_focal_fid')
         source_is_focal=(focal is not None and flid==focal)
         if policy not in ('all','none','nonfocal_only','focal_only',
-                          'dynamic_self_off','offtarget_rate_control'):
+                          'dynamic_self_off','offtarget_rate_control',
+                          'offtarget_step_budget'):
             raise ValueError('Unknown E015 deposition policy')
         # The dynamic focal ID is set by an observation-only material-bridge
         # tracker immediately after identify(), before catalytic births.
@@ -352,12 +353,23 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         off_target_draw=(random.Random(mix(seed+12345,t,92,ia,ib)).random()
                          if policy=='offtarget_rate_control' else None)
         off_target_rate=s.get('e015_offtarget_rate',0.0)
+        # A shadow-sham-derived schedule may allocate a per-tick count of
+        # nonfocal suppressions. Consume only on realized births; no extra
+        # random draws and no interference with catalytic birth itself.
+        scheduled_block=False
+        if policy=='offtarget_step_budget' and not source_is_focal:
+            budget=s.get('e015_offtarget_step_budget',{}).get(t,0)
+            used=s.setdefault('e015_offtarget_step_used',{}).get(t,0)
+            if used<budget:
+                scheduled_block=True
+                s['e015_offtarget_step_used'][t]=used+1
         deposit=(policy=='all' or
                  (policy=='focal_only' and source_is_focal) or
                  (policy=='nonfocal_only' and not source_is_focal) or
                  (policy=='dynamic_self_off' and not source_is_focal) or
                  (policy=='offtarget_rate_control' and
-                  (source_is_focal or off_target_draw>=off_target_rate)))
+                  (source_is_focal or off_target_draw>=off_target_rate)) or
+                 (policy=='offtarget_step_budget' and not scheduled_block))
         source_key='focal' if source_is_focal else 'nonfocal'
         s['e015_stats']['catalytic_births_'+source_key]+=1
         if deposit:
