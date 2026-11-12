@@ -303,3 +303,79 @@ mechanism only; they do not prove that the structure produces its own
 continuity. No inference of RAF closure, autopoiesis, spontaneous
 life, reproduction or adaptive computation from these counts. Preserve
 the negative/mixed prior stages and publication hold.
+
+
+## Phase 5 — Dynamic material-bridge source ablation (planned 2026-11-12)
+
+**Prior observations:** E015 Phase 4 recovered 177 self-bridge catalytic births
+across the 12 focal trajectories versus 60 births credited to the frozen
+functional ID in Phase 3. Across 12 seeds, the Phase 4 static same-draw field
+audit attributed **10 avoided bond-break trials** (five seeds) to self-sourced
+field on a material bridge. These are static counterfactual threshold results,
+**not** a demonstration that dynamic source removal affects organizational
+survival.
+
+**Hypothesis:** ongoing protective-field deposition by the *materially bridged
+successor* increases that successor's persistence and functional similarity to
+its checkpoint configuration, relative to selective removal of its source.
+The mechanism of protective-field production is designed, not emergently
+invented.
+
+**Prespecified data and procedure:** Seeds 0–11, 24×24 substrate, 600 steps,
+all E015 defaults unchanged. All arms begin from exactly the same state at
+the end of step 300 after locally coupled activity; focal selection is identical
+to Phases 3/4 (prior 40-step births, then age, size, ID). Every tick after the
+bond update and functional-group identification, track the connected group
+with greatest material overlap to the prior selected group. Ambiguous splits
+are reported; trace ends after zero material overlap. This choice is made
+**within each arm's current state**, without inspecting future outcomes.
+
+| Arm | Protection-field deposition after checkpoint |
+|---|---|
+| `sham` | All realized catalytic births (unchanged) |
+| `dynamic_self_off` | All except births attributed to current material-bridge successor |
+| `offtarget_control` | Keep all focal deposits; block each nonfocal deposit with a fixed Bernoulli probability calibrated from past 40-step focal/nonfocal production at checkpoint |
+| `global_field_off` | Block all new deposits, allow existing field to decay |
+
+Catalytic births, substrate resources, reaction rules, and original random
+streams are **not directly inhibited**. Field suppression has a delayed physical
+effect only from subsequent ticks; the first diverging tick retains the same
+predeposit physical state.
+
+**Dosing caveat:** The off-target control is *calibrated prospectively*
+using only preintervention history, but actual suppressed deposit counts,
+location, timing, field mass and consequent trajectories are **not guaranteed
+matched**. Report both exposure counts, flag seeds where the intervention
+did not actually affect a focal source, and report unequal dosing explicitly.
+No causal self-maintenance conclusion if this control is poorly exposed or
+poorly matched. Classification depends on heuristic material overlap and
+the single chosen successor; merges may change identity in all arms.
+
+**Outcome measures:** material-bridge present-steps, first material loss,
+mean cosine similarity of its catalytic-pair motif profile with the
+checkpoint, steps with an active productive motif, mean protective field at
+its sites, source-labelled realized births, source-specific blocked/allowed
+deposits, lineage-ID changes and ambiguous splits, paired seed-level effects.
+Postbranch birth counts and deposition counts must reconcile exactly.
+
+**Code and execution:**
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment015
+python3 -m unittest -v test_dynamic_source_ablation.py test_ancestry_exposure.py test_source_ablation.py test_e015.py test_ablation.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment015/dynamic_source_ablation.py \
+  --checkpoint 300 --end 600 \
+  --out ~/abio/track2/rco002/experiment015/results/dynamic_source_ablation.json
+```
+
+**Evidence gates:** Tests pass; fixed-checkpoint states identical; sham
+observationally equals the original local trajectory; source accounting
+reconciles with realized catalytic births; focal source suppression has
+nonzero opportunity in enough seeds; off-target exposure differences are
+quantified. Only then interpret source-sensitive differences in bridge
+survival and function. No claims of verified RAF closure, autopoiesis,
+self-maintenance, heredity or abiogenesis.
