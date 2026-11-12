@@ -247,6 +247,9 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
     s['e015_field']={i:v*decay_factor for i,v in old_field.items()
                      if v*decay_factor>=.01}
     active_field=s['e015_field']
+    audit=s.get('e015_audit_hook')
+    if audit is not None:
+        audit('field_ready',s=s,t=t)
     if mode=='shuffled':
         # Permute the SAME accumulated field strengths to randomized locations,
         # preserving global protection mass while breaking spatial association.
@@ -272,6 +275,10 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
             local_value=(active_field.get(i,0.0)+active_field.get(j,0.0))/2.0
             effective_break=effective_break_rate(a.bond_break,strength,local_value)
             s['e015_stats']['break_trials']+=1
+            if audit is not None:
+                audit('bond_trial',s=s,t=t,sites=e,particle_ids=(ids[e[0]],ids[e[1]]),
+                      draw=draw,threshold=effective_break,baseline=a.bond_break,
+                      strength=strength)
             if local_value>.01:
                 s['e015_stats']['exposed_trials']+=1
                 if effective_break<=draw<a.bond_break:
@@ -282,6 +289,8 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         elif degree[i]<2 and degree[j]<2 and rng.random()<a.bond_form:
             bonds.add(e);degree[i]+=1;degree[j]+=1
     identify(s,seed,mode,t,events,lineage_rows)
+    if audit is not None:
+        audit('after_identify',s=s,t=t)
     # Use stable pair-ID keyed random streams. In both branches every identical
     # catalyst pair sees the same activation and product-site draws; suppressing
     # a birth never consumes downstream unrelated random numbers.
@@ -348,6 +357,10 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
             s['e015_stats']['deposited_births_'+source_key]+=1
         else:
             s['e015_stats']['blocked_deposits_'+source_key]+=1
+        if audit is not None:
+            audit('catalytic_event',s=s,t=t,producer_fid=flid,
+                  catalyst_ids=(ia,ib),sites=(x,y,chosen),product_id=pid,
+                  deposited=deposit)
         s['motif_events'].append(dict(seed=seed,mode=mode,step=t,producer_fid=flid,
             target_producer=int(flid is not None and flid==s['target_flid']),
             exact_branch_motif=int(motif in s.get('branch_motifs',set())),
@@ -406,6 +419,8 @@ def tick(s,seed,mode,t,a,events,lineage_rows):
         recent_branch_motif_births=len(latest),recent_regenerative_incorporations=len(uptake),
         strict_candidate=int(strict),
         current_fingerprint=json.dumps(current,sort_keys=True)))
+    if audit is not None:
+        audit('tick_end',s=s,t=t)
 
 def simulate(seed, a, out):
     base=initialize(seed,a); common_events=[]; common_lineages=[]
