@@ -458,3 +458,65 @@ python3 ~/abio-publish/track2/rco002/rco002_experiment015/causal_divergence.py \
 The first-divergence trace is a diagnostic, NOT proof that a dynamically
 regenerating chemical RAF or self-maintaining organism exists. Preserve
 the negative/mixed first-pass and source-specific Phase 3 findings.
+
+
+## Note 004 final mechanistic audit — preregistered 2026-11-13
+
+**Purpose:** Explain heterogeneous effects of local catalytic field protection on
+materially traced organization, without converting exploratory correlates into
+claims of discovered self-maintenance. Uses unchanged E015 physics, checkpoint
+t300, end t600, seeds **12–23** from the already-reported held-out cohort.
+These are NOT fresh independent experiments a second time; this is
+a retrospective mechanistic audit of a previously observed cohort.
+
+The `note004_mechanistic_audit.py` driver replays sham and dynamically
+self-deposition-ablated continuations from an identical checkpoint and audits:
+
+- Material entries and departures across adjacent tracked connected components;
+  retain original particle counts as separate metrics. No guarantee that entry
+  represents regenerative incorporation.
+- Gains and losses of **internal particle-ID bond pairs**, initialized from
+  checkpoint bonds; include mergers/splits and membership changes, not just
+  reaction-specific bond formation or breakage.
+- Catalytic births attributed to the current materially bridged functional ID,
+  its field deposits allowed/blocked, and the number of other productive
+  deposits occurring directly at selected sites.
+- Field strength at current organization sites, local nutrient occupancy within
+  one graph-neighbor hop (availability only), and catalytic motif presence and
+  similarity to checkpoint.
+- Actual bond-break trials sampling endpoint IDs in the **preceding** material
+  bridge; field exposure, realized break outcomes, and same-draw no-protection
+  baseline-avoided breaks. These metrics concern the bond risk set and DO NOT
+  prove energetic closure or autonomous repair.
+- All seed-level outcomes including beneficial, harmful, and null effects.
+  Summaries distinguish per-present-step composition from per-seed totals.
+  Never use post-treatment exposure variables as if they were randomized
+  baseline predictors.
+
+Regression gate: with tracing enabled, every seed's sham final physical state
+must exactly hash-match a separate hook-free E015 sham continuation.
+Source-deposition suppression must leave catalytic births free to occur.
+Use explicit per-seed provenance and full per-step JSON without modifying
+previous experiment datasets or E015 parameters.
+
+```bash
+cd ~/abio-publish
+git pull --ff-only origin e014-candidate-audit-v1
+cd track2/rco002/rco002_experiment015
+python3 -m unittest -v test_note004_mechanistic_audit.py test_causal_divergence.py test_dynamic_source_ablation.py test_ancestry_exposure.py test_source_ablation.py test_e015.py test_ablation.py
+
+cd ~/abio
+python3 ~/abio-publish/track2/rco002/rco002_experiment015/note004_mechanistic_audit.py \
+  --checkpoint 300 --end 600 \
+  --out ~/abio/track2/rco002/experiment015/results/note004_mechanistic_audit.json
+```
+
+**Publication stop rule:** After this audit, publish Note 004 as a bounded
+negative/mixed-results investigation if the evidence still does not establish
+generalizable self-maintenance; do not require endless new experiments. Report
+what causal bond-level observations are supported, which organizational
+survival differences lack consistency, mechanism-level open questions, and
+limits of one-successor material continuity. Only perform a separate fresh
+confirmatory test if a specific prospective hypothesis is defined in advance
+and independently testable. Website publication requires an authorized site
+content workflow and investigator review of the completed run.
