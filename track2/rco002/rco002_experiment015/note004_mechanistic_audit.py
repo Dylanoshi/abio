@@ -31,12 +31,20 @@ EXPLORATORY_SEEDS=list(range(12,24))
 
 class Mechanics(MaterialBridge):
     """Instrument a single dynamically tracked material bridge, per arm."""
-    def __init__(self,focal,size):
+    def __init__(self,focal,size,checkpoint_state):
         super().__init__(focal)
         self.side=size
         self.prior_ids=set(self.ids)
-        self.prior_bonds=set()
-        self.current_bonds=set()
+        # Include checkpoint's real internal bonds in the risk set so the
+        # first post-checkpoint tick is NOT falsely counted as all-new bonds.
+        self.prior_bonds={
+            tuple(sorted((checkpoint_state["ids"][x],checkpoint_state["ids"][y])))
+            for x,y in checkpoint_state["bonds"]
+            if x in checkpoint_state["ids"] and y in checkpoint_state["ids"]
+            and checkpoint_state["ids"][x] in self.ids
+            and checkpoint_state["ids"][y] in self.ids
+        }
+        self.current_bonds=set(self.prior_bonds)
         self.cumulative_entered=0
         self.cumulative_exited=0
         self.pretrial=Counter()
@@ -218,7 +226,7 @@ def paired_audit(sim,params,seeds,checkpoint=300,end=600,verify_sham=True):
             state=copy.deepcopy(root)
             if physical_signature(state)!=checkpoint_hash:
                 raise AssertionError("Checkpoint mismatch")
-            trace=Mechanics(selected,a.size)
+            trace=Mechanics(selected,a.size,root)
             state["e015_audit_hook"]=trace
             state["e015_deposition_policy"]=policy
             for t in range(checkpoint+1,end+1):
