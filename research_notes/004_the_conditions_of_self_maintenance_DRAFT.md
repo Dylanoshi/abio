@@ -2,7 +2,7 @@
 
 **Subtitle:** Catalytic Feedback, Structural Persistence, and the Search for Regenerative Organization
 
-**Status:** FINAL SCIENTIFIC DRAFT — pending independent editorial review and website publication. Mechanistic audit completed 2026-11-13; regression suite status for the latest audit not supplied.
+**Status:** VERIFIED SCIENTIFIC DRAFT — pending final regression-test output, editorial approval, and website publication. Full original machine-readable audit independently reconciled to every reported aggregate on 2026-11-13.
 **Project:** ABIO — Computational Abiogenesis
 **Scope:** E015 phases 1–6 and final mechanistic audit.
 **Position:** Experimental research note, not evidence that artificial life has emerged.
@@ -257,7 +257,9 @@ lifespan alone as the success criterion.
 - [x] Add contextual RAF/CAF and computational-life references without claiming originality.
 - [ ] Conduct a full independent novelty review before journal submission.
 - [x] Add deterministic visual summary using reported seed-level paired outcomes.
-- [ ] Archive the exact machine-readable raw JSON output and cross-check figures against it.
+- [x] Independently reconcile complete uploaded raw JSON (12 × 2 × 300 time-series records) against every per-seed and aggregate numeric summary, and verify figure's 12 seed differences.
+- [x] Record raw JSON SHA-256 and a compact verified evidence archive in GitHub.
+- [ ] Publish or separately deposit complete raw time-series JSON as a permanent public attachment (digest is committed; raw dataset is presently only available as investigator-uploaded source).
 - [ ] Identify authorized ABIO website publishing integration and publish after review.
 
 
@@ -273,4 +275,6 @@ lifespan alone as the success criterion.
 - Output: `~/abio/track2/rco002/experiment015/results/note004_mechanistic_audit.json` on investigator workstation. **This file has not yet been copied to the GitHub repository or verified by the assistant.**
 - E015 parameters: 24×24 lattice; 600 steps; checkpoint step 300; selected seeds 12–23; original E015 defaults unchanged; sham and dynamic self-deposition-removal arms.
 - Selection: checkpoint prior 40-step catalytic activity, age, component size and ID; outcomes are measured from 301–600.
+- The original uploaded JSON was checked in full: file size **7,384,244 bytes**, SHA-256 **95afd90dbe3baec7267b5969f6ba20df80898fc866eb1f5adb20ec965f05d147**. All 12 × 2 arm summaries reconcile with their 300-step observations, the seed-paired effects reproduce the figure, and the published aggregate means match the recomputed means. No accounting discrepancies were found.
+- Compact validated summary and digest: `research_notes/004_verified_evidence_summary.json`. **Do not mistake this compact summary for the full raw 7.4 MB time-series JSON; the full raw file still needs a permanent public archive.**
 - The observation and audit code is versioned; full raw simulation output and any figure-data exports should accompany public web release.
