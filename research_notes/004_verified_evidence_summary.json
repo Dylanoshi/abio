@@ -1,0 +1,98 @@
+{
+  "schema": "abio-note004-audited-evidence-v1",
+  "source": {
+    "filename": "note004_mechanistic_audit.json",
+    "bytes": 7384244,
+    "sha256": "95afd90dbe3baec7267b5969f6ba20df80898fc866eb1f5adb20ec965f05d147",
+    "origin": "investigator-uploaded raw JSON, 2026-11-13",
+    "full_data_status": "uploaded and verified in ChatGPT session; full raw JSON not yet publicly archived in GitHub",
+    "sim_sha256": "e84a176d7827b00f5a2d6893e15ea81c7044c67ab4de22b4c85f44eee8e81006",
+    "audit_sha256": "52df88a11ef007bc67a8696c2a739527a32a941eb36bf3a3d4795cf4dbb754b6"
+  },
+  "design": {
+    "seeds": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "size": 24,
+    "checkpoint": 300,
+    "end": 600,
+    "arms": [
+      "sham",
+      "self_removed"
+    ],
+    "note": "same previously reported held-out cohort; mechanistic retrospective audit, not further independent replication"
+  },
+  "paired_sham_minus_self": [
+    0,
+    23,
+    18,
+    -54,
+    -97,
+    0,
+    0,
+    131,
+    -37,
+    79,
+    0,
+    0
+  ],
+  "aggregate_mean": {
+    "sham": {
+      "bridge_present_steps": 204.58333,
+      "mean_motif_similarity_all_steps": 0.37368,
+      "mean_motif_similarity_when_present": 0.5483,
+      "total_material_entered": 34.33333,
+      "total_material_departed": 39.5,
+      "total_internal_bond_gains": 34.5,
+      "total_internal_bond_losses": 39,
+      "total_focal_catalytic_births": 11.5,
+      "mean_field_when_present": 0.11506,
+      "focal_bond_break_trials": 467.08333,
+      "focal_bond_exposed_trials": 198.66667,
+      "focal_bond_actual_break_trials": 7.75,
+      "focal_baseline_avoided_break_trials": 1.41667
+    },
+    "self_removed": {
+      "bridge_present_steps": 199.33333,
+      "mean_motif_similarity_all_steps": 0.36187,
+      "mean_motif_similarity_when_present": 0.60341,
+      "total_material_entered": 31.33333,
+      "total_material_departed": 37.66667,
+      "total_internal_bond_gains": 31.75,
+      "total_internal_bond_losses": 37.33333,
+      "total_focal_catalytic_births": 11.58333,
+      "mean_field_when_present": 0.0122,
+      "focal_bond_break_trials": 441.08333,
+      "focal_bond_exposed_trials": 69.66667,
+      "focal_bond_actual_break_trials": 7.58333,
+      "focal_baseline_avoided_break_trials": 0.33333
+    }
+  },
+  "checks": {
+    "record_count": 12,
+    "all_timelines_steps": 300,
+    "all_timelines_step_range": [
+      301,
+      600
+    ],
+    "aggregate_means_recalculated": true,
+    "paired_effects_recalculated": true,
+    "per_seed_timeline_summary_accounting": true,
+    "source_suppression_accounting": true,
+    "bond_trial_bounds": true,
+    "errors_found": 0,
+    "physics_replay": "experiment reported successful parity all seeds; no independent rerun from raw state"
+  },
+  "interpretation": "local bond protection consequential; no consistent organization-level persistence benefit, no regenerative self-maintenance shown"
+}
