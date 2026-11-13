@@ -29,3 +29,10 @@ ls -lh ~/abio/track2/rco002/experiment015/results/note004_mechanistic_audit.json
 ```
 
 The reported final audit and physical-parity checks completed across all 12 seeds. The unit-test rerun and original raw JSON are still needed to complete the publication provenance record.
+
+
+## RN-003 editorial and presentation parity (2026-11-13)
+
+The supplied previous website Research Note 003 is the **layout and voice reference**. In the current ABIO site reuse its existing article template: breadcrumb `Experiments / RN-004`, Research Note 004 eyebrow, title/subtitle, Program/Date/Status fields, four restrained metric cards, abstract, numbered `§` sections, experiment-specific headings, individually numbered figure and caption, research-question assessment table, conclusion and next investigation, reproducibility and provenance, references, and footer links. Avoid generic marketing copy or one-sentence-per-line writing. Keep the same sober, specific, conditionally stated research voice. Text must not give stronger conclusions than the actual measurements.
+
+Use the article's full revised Markdown, not the earlier outline, as the source of truth. The publication manifest now includes site presentation metadata and card values. Use muted figure colours consistent with RN-003's established palette; preserve the already data-grounded SVG unless the site renderer requires an equivalent native figure. Add navigation links back to all experiments and to RN-003 using the site's real routes. Do not invent a live URL or claim RN-004 is published until that occurs.
