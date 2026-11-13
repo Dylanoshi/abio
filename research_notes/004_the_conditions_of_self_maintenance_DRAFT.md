@@ -194,7 +194,51 @@ No formally demonstrated RAF/CAF closure, spatial compartmental
 self-maintenance, heritable reproduction, or spontaneous artificial
 organism is claimed.
 
-## 6. A bounded conclusion
+## 6. Relation to prior research
+
+Formal RAF (reflexively autocatalytic and food-generated) theory defines a
+reaction subset by **catalytic support** and **generation of its reactants
+from a specified food set**. Catalytic activity observed in our substrate
+is not enough to infer either formal condition, and we have not extracted
+or certified a realized RAF subnetwork. In particular, catalytic field
+production that stabilizes a bond is conceptually distinct from producing
+the constituents needed to maintain a reaction network. See Hordijk and
+Steel (2019) and the formal algorithmic exposition by Hordijk (2023).
+
+The distinction between RAFs and constructively autocatalytic and
+food-generated (CAF) networks is likewise relevant: CAFs place additional
+constructive ordering requirements on the availability of catalysts and
+reactants. We make no CAF claim. Our experimental results instead focus on
+**local physical consequences of production-linked structural protection**.
+
+Work on emerging self-replicating programs in computational substrates
+(Agüera y Arcas et al., 2024) illustrates a different level of life-like
+organization: spontaneous replicators produced by program interaction.
+Our experiment deliberately does not prespecify organisms, but it also
+does not demonstrate self-replication, heredity or adaptive evolution.
+It therefore addresses an earlier, weaker problem: when a local feedback
+mechanism contributes causally to persistence.
+
+These connections frame the present note; **they do not establish
+publication novelty or a theorem extending RAF/CAF theory**. A formal
+theoretical claim would require new definitions and proofs or independently
+controlled experiments beyond the present scope.
+
+**Selected references**
+
+- Hordijk, W., & Steel, M. (2019). *Autocatalytic networks in biology:
+  structural theory and algorithms.* Philosophical Transactions of the Royal
+  Society B. https://pmc.ncbi.nlm.nih.gov/articles/PMC6408349/
+- Hordijk, W. (2023). *A Concise and Formal Definition of RAF Sets and the
+  RAF Algorithm.* https://arxiv.org/abs/2303.01809
+- Steel, M., et al. (2020). *The structure of autocatalytic networks, with
+  application to early biochemistry.*
+  https://doi.org/10.1098/rsif.2020.0488
+- Agüera y Arcas, B., et al. (2024). *Computational Life: How Well-formed,
+  Self-replicating Programs Emerge from Simple Interaction.*
+  https://arxiv.org/abs/2406.19108
+
+## 7. A bounded conclusion
 
 Note 004 focuses the distinction between **structural persistence** and
 **causal organizational maintenance**. Evidence of internally generated
@@ -210,10 +254,18 @@ lifespan alone as the success criterion.
 - [x] Governing field-break law checked against E015 code.
 - [x] Mixed/negative findings retained, including both counterexamples and null outcomes.
 - [ ] Confirm most recent Note004 unit tests were run successfully.
-- [ ] Complete external literature/novelty comparison before describing the work as original.
-- [ ] Add/verify site figures and reproducibility links to archived raw JSON results.
+- [x] Add contextual RAF/CAF and computational-life references without claiming originality.
+- [ ] Conduct a full independent novelty review before journal submission.
+- [x] Add deterministic visual summary using reported seed-level paired outcomes.
+- [ ] Archive the exact machine-readable raw JSON output and cross-check figures against it.
 - [ ] Identify authorized ABIO website publishing integration and publish after review.
 
+
+## Main figure
+
+![Figure 1. E015 held-out paired effects: the same self-produced structural protection can help, harm or leave measured organizational continuity unchanged.](figures/note004_heldout_seed_effects.svg)
+
+*Figure 1.* Sham minus dynamic self-source-suppressed material-bridge present-steps, seeds 12–23, postcheckpoint window 301–600. Positive values favor protection; negative values favor suppression. Figure constructed from the investigator's terminal summary, not independently archived raw JSON.
 
 ## Reproducibility and provenance
 
