@@ -2,7 +2,7 @@
   "schema": "abio-publication-manifest-v1",
   "id": "research-note-004",
   "title": "The Conditions of Self-Maintenance",
-  "subtitle": "Catalytic Feedback, Structural Persistence, and the Search for Regenerative Organization",
+  "subtitle": "Catalytic feedback, structural persistence, and the search for regenerative organization in a spatial computational substrate.",
   "slug": "research/notes/004-the-conditions-of-self-maintenance",
   "status": "scientific-draft-audited-pending-regression-test-and-web-publication",
   "date": "2026-11-13",
@@ -77,5 +77,55 @@
     "checks": "full 12 seeds x 2 arms x 300-step audit validates 100% of aggregate metrics and summary accounting",
     "github_summary_path": "research_notes/004_verified_evidence_summary.json",
     "raw_public_archive_status": "not yet permanently archived"
+  },
+  "site_template_reference": "RN-003 — Replication, Population Takeover, and Recovery in a Mutation-Free Computational Substrate",
+  "presentation": {
+    "eyebrow": "Experiments / RN-004",
+    "heading": "Research Note 004",
+    "program": "ABIO — Computational Abiogenesis Research",
+    "date": "November 13, 2026",
+    "status": "Completed experimental investigation; raw-data numerical audit completed; final regression-test and website publication checks pending",
+    "metric_cards": [
+      {
+        "label": "Held-out interventions",
+        "value": "12",
+        "detail": "seeds 12–23; checkpoint 300"
+      },
+      {
+        "label": "Material continuity",
+        "value": "204.58 / 199.33",
+        "detail": "mean sham / self-source removed, 300 steps"
+      },
+      {
+        "label": "Field-exposed trials",
+        "value": "198.67 / 69.67",
+        "detail": "mean sham / suppression"
+      },
+      {
+        "label": "Paired outcomes",
+        "value": "4 / 3 / 5",
+        "detail": "sham favored / suppression favored / tied"
+      }
+    ],
+    "sections": [
+      "Abstract",
+      "§ 1 Research question",
+      "§ 2 System and operational definitions",
+      "§ 3 Experiment 015: substrate-level structural feedback",
+      "§ 4 Experiment 015: source attribution and material continuity",
+      "§ 5 Experiment 015: independent-seed intervention",
+      "§ 6 Experiment 015: mechanistic turnover audit",
+      "§ 7 Interpretation and limitations",
+      "§ 8 Research question assessment",
+      "§ 9 Conclusion and next investigation",
+      "Reproducibility and provenance",
+      "References"
+    ],
+    "figure_caption_style": "Figure 1 — Paired effect of self-produced protection on material continuity (Experiment 015, seeds 12–23)",
+    "links": [
+      "Manuscript on GitHub",
+      "Data and reproducibility materials",
+      "← All experiments"
+    ]
   }
 }
