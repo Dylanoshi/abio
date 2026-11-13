@@ -4,7 +4,7 @@
   "title": "The Conditions of Self-Maintenance",
   "subtitle": "Catalytic Feedback, Structural Persistence, and the Search for Regenerative Organization",
   "slug": "research/notes/004-the-conditions-of-self-maintenance",
-  "status": "ready-for-review-not-published",
+  "status": "scientific-draft-audited-pending-regression-test-and-web-publication",
   "date": "2026-11-13",
   "project": "ABIO — Computational Abiogenesis",
   "source": "research_notes/004_the_conditions_of_self_maintenance_DRAFT.md",
@@ -60,13 +60,22 @@
       "final audit run 12 seeds",
       "sham physical parity all seeds",
       "evidence-integrated article",
-      "literature context and figure"
+      "literature context and figure",
+      "full raw JSON independently reconciled with all per-seed summaries and numerical manuscript findings"
     ],
     "remaining": [
       "latest note004 regression suite output",
-      "raw machine-readable results archived and verified",
       "investigator review",
-      "Airo website publishing access and live URL validation"
+      "Airo website publishing access and live URL validation",
+      "full raw time-series file deposited publicly using verified SHA-256"
     ]
+  },
+  "raw_evidence": {
+    "file": "note004_mechanistic_audit.json",
+    "bytes": 7384244,
+    "sha256": "95afd90dbe3baec7267b5969f6ba20df80898fc866eb1f5adb20ec965f05d147",
+    "checks": "full 12 seeds x 2 arms x 300-step audit validates 100% of aggregate metrics and summary accounting",
+    "github_summary_path": "research_notes/004_verified_evidence_summary.json",
+    "raw_public_archive_status": "not yet permanently archived"
   }
 }
