@@ -2,7 +2,7 @@
 
 **Subtitle:** Catalytic Feedback, Structural Persistence, and the Search for Regenerative Organization
 
-**Status:** EDITORIAL DRAFT — not published. Mechanistic audit pending.
+**Status:** FINAL SCIENTIFIC DRAFT — pending independent editorial review and website publication. Mechanistic audit completed 2026-11-13; regression suite status for the latest audit not supplied.
 **Project:** ABIO — Computational Abiogenesis
 **Scope:** E015 phases 1–6 and final mechanistic audit.
 **Position:** Experimental research note, not evidence that artificial life has emerged.
@@ -21,7 +21,7 @@ increases continuity. We distinguish local bond protection from the stronger
 requirements of ongoing functional regeneration and organizational
 self-maintenance.
 
-**This abstract is provisional; update it after the final audit.**
+The final mechanistic audit of seeds 12–23 corroborates the large change in bond-field exposure without a consistent benefit in material-bridge duration. We conclude that internally generated bond protection is an observable substrate-level mechanism, but that protection alone is insufficient evidence of regenerative organizational closure.
 
 ## 1. Persistence is not self-maintenance
 
@@ -108,15 +108,77 @@ for spatial field mass or bond exposure.
 
 ## 4. Final mechanistic audit: turnover, function, and resource context
 
-**PENDING:** Insert the complete, unchanged E015 Note004 audit output
-from `note004_mechanistic_audit.py`. Report the same 12 seeded pairs,
-including positive, negative and null persistence effects. Examine
-material entries/departures, bond turnover, functional motifs, catalytic
-births, field exposure at focal bonds, and local resource availability.
+The completed audit used the **same 12 seeds (12–23)** from the earlier
+held-out evaluation, replayed from the same checkpoint under sham and dynamic
+self-source suppression. These are **not twelve new replication seeds**.
+Every instrumented sham reported a successful final physical-state parity
+check against an independent uninstrumented E015 replay. The last audit's
+unit-test suite has not been reported in the shared transcript.
 
-Do not interpret post-intervention correlations as preintervention
-determinants. Distinguish mechanisms of protection from proof of
-regenerative causality.
+| Mean per seed, steps 301–600 | Sham protection | Dynamic self-source removal |
+|---|---:|---:|
+| Material-bridge presence (steps) | 204.5833 | 199.3333 |
+| Mean checkpoint-motif similarity, all steps | 0.37368 | 0.36187 |
+| Mean checkpoint-motif similarity, conditional on presence | 0.54830 | 0.60341 |
+| Mean active motif count, conditional on presence | 3.74136 | 3.62412 |
+| Particles entering the material bridge | 34.3333 | 31.3333 |
+| Particles departing the material bridge | 39.5000 | 37.6667 |
+| Internal particle-ID bond gains | 34.5000 | 31.7500 |
+| Internal particle-ID bond losses | 39.0000 | 37.3333 |
+| Catalytic births assigned to the tracked bridge | 11.5000 | 11.5833 |
+| Mean field at bridge sites, conditional on presence | 0.11506 | 0.01220 |
+| Actual bridge bond-break trials | 467.0833 | 441.0833 |
+| Field-exposed bridge bond-break trials | 198.6667 | 69.6667 |
+| Actual bridge bond-break trials leading to breaks | 7.7500 | 7.5833 |
+| Same-draw baseline-avoided break trials | 1.4167 | 0.3333 |
+| Neighboring nutrient-site count, conditional on presence | 1.20663 | 1.22759 |
+
+**Why the mechanistic audit matters.** Removing source deposits reduced the
+mean observed protective field at the bridge sites by nearly an order of
+magnitude and reduced field-exposed bond-break trials. The local physical
+mechanism is thus exercised in the actual bridge risk set. This did **not**
+translate into a consistent advantage in bridge persistence or catalytic
+production. The average number of catalytic births assigned to the traced
+bridge was essentially unchanged across the two arms.
+
+The material-flow measures also offer no simple explanation. In the sham arm,
+more particles entered and left traced components, and more internal
+particle-ID bond pairs were gained and lost in absolute counts. But these
+totals are affected by longer observation windows, changing component sizes,
+mergers and losses. They cannot be read as direct rates of repair, uptake,
+or autonomous regeneration.
+
+In particular, higher *conditional* checkpoint-motif similarity in the
+self-source-removed arm (0.60341 versus 0.54830) does not imply that field
+protection reduces function: conditioning on bridge presence selects
+different time windows and surviving organizational states.
+
+### Contrasting individual outcomes
+
+We intentionally retained all twelve outcomes. Among pronounced examples,
+sham protected longer in seed **19** (217 versus 86 steps) and seed **21**
+(131 versus 52). In contrast, removal preserved material connectivity longer
+in seed **16** (169 versus 266) and seed **15** (246 versus 300).
+Seed **12** retained the bridge for all 300 postcheckpoint steps in both
+arms with identical monitored material-entry and departure counts (40, 34).
+These divergent outcomes are findings to explain, not evidence for selecting
+only positive trajectories.
+
+A plausible—but **untested**—hypothesis is that protection helps when
+maintaining productive local catalytic topology, while sometimes impeding
+rearrangements or shifting later stochastic interactions. This study has
+**not** established a predictive relationship between preintervention network
+topology, regeneration rate and intervention benefit. Testing that mechanism
+would require a separately prespecified, prospective design.
+
+### Interpretation boundary
+
+Bond exposure, material exchange and functional motif similarity are
+different quantities. The simulation directly implements a rate change in
+bond breaking; it does not provide an autonomous repair program, metabolic
+constraint, energy accounting, self-generated boundary or closed RAF/CAF
+verification. Therefore observed self-sourced protection cannot on its own
+qualify as organizational self-maintenance.
 
 ## 5. Interpretation and limits
 
@@ -143,10 +205,20 @@ lifespan alone as the success criterion.
 
 ## Publication requirements
 
-- [ ] Final mechanistic audit runs and regression tests pass.
-- [ ] Insert final numeric audit findings and figures with seed-level provenance.
-- [ ] Verify model equations, control logic and terminology against code.
-- [ ] Cross-check scientific novelty against RAF/CAF, autopoiesis and artificial-life literature.
-- [ ] Preserve the mixed/negative results; do not select only responders.
-- [ ] Confirm the ABIO website content publishing interface and authorized destination.
-- [ ] Publish final checked text, clearly marked Research Note 004.
+- [x] Final 12-seed mechanistic audit executed and sham physics parity checks reported.
+- [x] Final numeric audit findings integrated, all 12 seed-level duration effects preserved.
+- [x] Governing field-break law checked against E015 code.
+- [x] Mixed/negative findings retained, including both counterexamples and null outcomes.
+- [ ] Confirm most recent Note004 unit tests were run successfully.
+- [ ] Complete external literature/novelty comparison before describing the work as original.
+- [ ] Add/verify site figures and reproducibility links to archived raw JSON results.
+- [ ] Identify authorized ABIO website publishing integration and publish after review.
+
+
+## Reproducibility and provenance
+
+- Code repository: https://github.com/Dylanoshi/abio ; branch `e014-candidate-audit-v1`, E015 driver `track2/rco002/rco002_experiment015/note004_mechanistic_audit.py`.
+- Output: `~/abio/track2/rco002/experiment015/results/note004_mechanistic_audit.json` on investigator workstation. **This file has not yet been copied to the GitHub repository or verified by the assistant.**
+- E015 parameters: 24×24 lattice; 600 steps; checkpoint step 300; selected seeds 12–23; original E015 defaults unchanged; sham and dynamic self-deposition-removal arms.
+- Selection: checkpoint prior 40-step catalytic activity, age, component size and ID; outcomes are measured from 301–600.
+- The observation and audit code is versioned; full raw simulation output and any figure-data exports should accompany public web release.
